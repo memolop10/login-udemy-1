@@ -16,4 +16,4 @@ import 'firebase/auth'
   const db = app.firestore()
   const auth = app.auth()
 
-  export default {db,auth};
+  export {db,auth};
