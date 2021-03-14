@@ -1,7 +1,8 @@
 import React from 'react'
 import {auth, db} from '../firebase'
+import {withRouter} from 'react-router-dom'
 
-const Login = () => {
+const Login = (props) => {
 
     const [email ,setEmail] = React.useState('')
     const [pass ,setPass] = React.useState('')
@@ -39,6 +40,10 @@ const Login = () => {
         try {
             const res = await auth.signInWithEmailAndPassword(email,pass)
             console.log(res.user)
+            setEmail('')
+            setPass('')
+            setError(null)
+            props.history.push('/admin')
         } catch (error) {
             if (error.code === "auth/user-not-found") {
                 setError('Email no encontrado') 
@@ -48,7 +53,7 @@ const Login = () => {
             }   
             console.log(error)
         }
-    },[email, pass])
+    },[email, pass,props.history])
 
     const registrar = React.useCallback(async() => {
         try {
@@ -61,7 +66,7 @@ const Login = () => {
             setEmail('')
             setPass('')
             setError(null)
-
+            props.history.push('/admin')
         } catch (error) {
             console.log(error)
             if (error.code === 'auth/invalid-email') {
@@ -71,7 +76,7 @@ const Login = () => {
                 setError('El email ya esta registrado')
             }
         }
-    }, [email,pass])
+    }, [email,pass,props.history])
 
     return (
         <div className="mt-5">
@@ -127,4 +132,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default withRouter(Login)
