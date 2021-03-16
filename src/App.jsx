@@ -26,7 +26,7 @@ function App() {
   return firebaseUser !== false ? (
     <Router>
       <div className="container mt-5">
-        <Navbar/>
+        <Navbar firebaseUser={firebaseUser}/>
         <Switch>
           <Route path="/" exact>
             inicio...

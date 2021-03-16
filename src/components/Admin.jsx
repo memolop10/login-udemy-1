@@ -19,6 +19,12 @@ const Admin = (props) => {
     return (
         <div>
           <h1>Ruta protegida</h1>
+          {
+              user !== null ? (
+                <h4>{user.email}</h4>
+              ) : null
+          }
+          
         </div>
     )
 }
